@@ -57,6 +57,22 @@ body {
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  .app {
+    margin: 2rem auto 0;
+    padding: 1rem 1rem 3rem;
+    min-height: calc(100vh - 2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    margin: 1rem auto 0;
+    padding: 0.5rem 0.5rem 2rem;
+    min-height: calc(100vh - 1rem);
+  }
+}
+
 .date-range-picker {
   margin-bottom: 2rem;
   padding: 2rem;
@@ -67,6 +83,21 @@ body {
   max-width: 800px;
 }
 
+@media (max-width: 768px) {
+  .date-range-picker {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-range-picker {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+  }
+}
+
 .range-info h2 {
   margin: 0 0 1.5rem 0;
   color: var(--text);
@@ -75,12 +106,40 @@ body {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .range-info h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .range-info h2 {
+    font-size: 1.25rem;
+    margin: 0 0 1rem 0;
+  }
+}
+
 .picker-controls {
   display: flex;
   gap: 2rem;
   align-items: end;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .picker-controls {
+    gap: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .picker-controls {
+    gap: 1rem;
+  }
 }
 
 .month-picker {
@@ -92,6 +151,23 @@ body {
 .date-range-inputs {
   display: flex;
   gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .date-range-inputs {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .month-picker {
+    width: 100%;
+  }
+  
+  .month-picker input,
+  .date-input input {
+    width: 100%;
+  }
 }
 
 .date-input {
@@ -200,6 +276,12 @@ body {
   max-width: 800px;
 }
 
+@media (max-width: 480px) {
+  .curator-fees-report {
+    margin-top: 1rem;
+  }
+}
+
 .report-summary {
   display: flex;
   justify-content: space-between;
@@ -211,9 +293,56 @@ body {
   border-radius: 12px;
 }
 
+@media (max-width: 768px) {
+  .report-summary {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .report-summary {
+    padding: 1rem;
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
+  
+  .copy-button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
 .summary-stats {
   display: flex;
   gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .summary-stats {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-stats {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    width: 100%;
+  }
+  
+  .stat {
+    align-items: center;
+    text-align: center;
+    padding: 0.75rem;
+    background: var(--card-on-modal);
+    border-radius: 8px;
+    border: 1px solid var(--secondary-on-modal);
+  }
 }
 
 .stat {
@@ -251,6 +380,30 @@ body {
 
 .fees-table {
   overflow-x: auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .fees-table {
+    margin: 0 -1rem;
+    width: calc(100% + 2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .fees-table {
+    margin: 0;
+    width: 100%;
+    overflow: visible;
+  }
+  
+  .fees-table table {
+    display: none;
+  }
+  
+  .mobile-curator-list {
+    display: block;
+  }
 }
 
 .fees-table table {
@@ -276,6 +429,21 @@ body {
   border-bottom: 1px solid var(--secondary-on-modal);
 }
 
+@media (max-width: 768px) {
+  .fees-table th,
+  .fees-table td {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fees-table th,
+  .fees-table td {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
 .fees-table tr:last-child td {
   border-bottom: none;
 }
@@ -293,6 +461,27 @@ body {
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
   border: 1px solid var(--secondary-on-modal);
+  word-break: break-all;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .payment-address .address {
+    max-width: 150px;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-address .address {
+    max-width: 100px;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
+  }
 }
 
 .curation-count {
@@ -356,6 +545,57 @@ body {
   align-items: center;
 }
 
+@media (max-width: 768px) {
+  .curation-header,
+  .curation-row {
+    grid-template-columns: 1fr 1.5fr 1fr 1fr 0.8fr;
+    gap: 0.75rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .curation-header,
+  .curation-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  .curation-header {
+    display: none;
+  }
+  
+  .curation-row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px solid var(--secondary-on-modal);
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+  }
+  
+  .curation-row > span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--secondary-on-modal);
+  }
+  
+  .curation-row > span:last-child {
+    border-bottom: none;
+  }
+  
+  .curation-row > span::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text);
+  }
+}
+
 .curation-row:last-child {
   border-bottom: none;
 }
@@ -414,6 +654,161 @@ body {
 }
 
 .tx-link:hover {
+  background: var(--primary);
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Mobile curator cards */
+.mobile-curator-list {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .mobile-curator-list {
+    display: block;
+    gap: 1rem;
+  }
+}
+
+.mobile-curator-card {
+  background: var(--secondary);
+  border: 1px solid var(--secondary-on-modal);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.mobile-curator-header {
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary);
+  border-bottom: 1px solid var(--secondary-on-modal);
+}
+
+.mobile-curator-header:hover {
+  background: var(--secondary-hover);
+}
+
+.mobile-curator-info {
+  flex: 1;
+}
+
+.mobile-curator-name {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobile-curator-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--secondary-text);
+}
+
+.mobile-curator-address {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--secondary-text);
+  background: var(--card-on-modal);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--secondary-on-modal);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-curator-fees {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.mobile-curator-details {
+  padding: 1rem;
+  background: var(--background);
+  border-top: 1px solid var(--secondary-on-modal);
+}
+
+.mobile-curations-header {
+  color: var(--text);
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+.mobile-curation-item {
+  background: var(--card-on-modal);
+  border: 1px solid var(--secondary-on-modal);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.mobile-curation-item:last-child {
+  margin-bottom: 0;
+}
+
+.mobile-curation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--secondary-on-modal);
+}
+
+.mobile-curation-row:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.mobile-curation-label {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+.mobile-curation-value {
+  color: var(--secondary-text);
+  font-size: 0.875rem;
+  text-align: right;
+  max-width: 60%;
+  word-break: break-word;
+}
+
+.mobile-collection-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.mobile-collection-link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.mobile-tx-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.mobile-tx-link:hover {
   background: var(--primary);
   color: var(--text);
   text-decoration: none;

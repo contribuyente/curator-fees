@@ -92,6 +92,7 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
       </div>
 
       <div className="fees-table">
+        {/* Desktop/Tablet Table View */}
         <table>
           <thead>
             <tr>
@@ -137,10 +138,10 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
                           </div>
                           {curator.curations.map((curation, index) => (
                             <div key={`${curation.txHash}-${index}`} className="curation-row">
-                              <span className="curation-date">
+                              <span className="curation-date" data-label="Date: ">
                                 {formatTimestamp(curation.timestamp)}
                               </span>
-                              <span className="curation-collection">
+                              <span className="curation-collection" data-label="Collection: ">
                                 <a 
                                   href={getCollectionUrl(curation.collectionId)} 
                                   target="_blank" 
@@ -150,13 +151,13 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
                                   {curation.collectionName}
                                 </a>
                               </span>
-                              <span className="curation-creation-fee">
+                              <span className="curation-creation-fee" data-label="Creation Fee: ">
                                 {formatMANA(curation.creationFee)}
                               </span>
-                              <span className="curation-curator-fee">
+                              <span className="curation-curator-fee" data-label="Curator Fee: ">
                                 {formatMANA(curation.curatorFee)}
                               </span>
-                              <span className="curation-tx">
+                              <span className="curation-tx" data-label="Transaction: ">
                                 <a 
                                   href={getPolygonscanUrl(curation.txHash)} 
                                   target="_blank" 
@@ -177,6 +178,90 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
             ))}
           </tbody>
         </table>
+
+        {/* Mobile Card View */}
+        <div className="mobile-curator-list">
+          {fees.map((curator) => (
+            <div key={`mobile-${curator.curatorId}`} className="mobile-curator-card">
+              <div 
+                className="mobile-curator-header"
+                onClick={() => toggleCuratorExpansion(curator.curatorId)}
+              >
+                <div className="mobile-curator-info">
+                  <div className="mobile-curator-name">
+                    <span className="expand-icon">
+                      {expandedCurator === curator.curatorId ? '▼' : '▶'}
+                    </span>
+                    {curator.curatorName}
+                  </div>
+                  <div className="mobile-curator-stats">
+                    <span className="mobile-curator-address">{curator.paymentAddress}</span>
+                    <span className="mobile-curator-fees">{formatMANA(curator.totalFees)}</span>
+                  </div>
+                  <div style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--secondary-text)' }}>
+                    {curator.curationCount} curations
+                  </div>
+                </div>
+              </div>
+              
+              {expandedCurator === curator.curatorId && (
+                <div className="mobile-curator-details">
+                  <h4 className="mobile-curations-header">
+                    Curations ({curator.curationCount}) - Chronological Order
+                  </h4>
+                  {curator.curations.map((curation, index) => (
+                    <div key={`mobile-${curation.txHash}-${index}`} className="mobile-curation-item">
+                      <div className="mobile-curation-row">
+                        <span className="mobile-curation-label">Date</span>
+                        <span className="mobile-curation-value">
+                          {formatTimestamp(curation.timestamp)}
+                        </span>
+                      </div>
+                      <div className="mobile-curation-row">
+                        <span className="mobile-curation-label">Collection</span>
+                        <span className="mobile-curation-value">
+                          <a 
+                            href={getCollectionUrl(curation.collectionId)} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="mobile-collection-link"
+                          >
+                            {curation.collectionName}
+                          </a>
+                        </span>
+                      </div>
+                      <div className="mobile-curation-row">
+                        <span className="mobile-curation-label">Creation Fee</span>
+                        <span className="mobile-curation-value">
+                          {formatMANA(curation.creationFee)}
+                        </span>
+                      </div>
+                      <div className="mobile-curation-row">
+                        <span className="mobile-curation-label">Curator Fee</span>
+                        <span className="mobile-curation-value">
+                          {formatMANA(curation.curatorFee)}
+                        </span>
+                      </div>
+                      <div className="mobile-curation-row">
+                        <span className="mobile-curation-label">Transaction</span>
+                        <span className="mobile-curation-value">
+                          <a 
+                            href={getPolygonscanUrl(curation.txHash)} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="mobile-tx-link"
+                          >
+                            View TX
+                          </a>
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
