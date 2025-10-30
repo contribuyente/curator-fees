@@ -26,7 +26,7 @@ export const curatorData: CuratorData = {
     paymentAddress: "0x91e222ed7598efbcfe7190481f2fd14897e168c8",
   },
   "0x399a44f5821b1f859bc236e14367c4f7c36933fb": {
-    name: "Shibu Old",
+    name: "Shibu (Old)",
     paymentAddress: "0x9dB59920d3776c2d8A3aA0CbD7b16d81FcAb0A2b",
   },
   "0x967fb0c36e4f5288f30fb05f8b2a4d7b77eaca4b": {
@@ -42,7 +42,7 @@ export const curatorData: CuratorData = {
     paymentAddress: "0xc8ad6322821b51da766a4b2a82b39fb72b53d276",
   },
   "0xa8c7d5818a255a1856b31177e5c96e1d61c83991": {
-    name: "AndreusAs",
+    name: "AndreusAs (Old)",
     paymentAddress: "0xa8c7d5818A255A1856b31177E5c96E1D61c83991",
   },
   "0x336685bb3a96e13b77e909d7c52e8afcff1e859e": {
@@ -50,7 +50,7 @@ export const curatorData: CuratorData = {
     paymentAddress: "0x336685bb3A96E13B77E909d7C52e8AfCfF1E859E",
   },
   "0x41eb5f82af60873b3c14fedb898a1712f5c35366": {
-    name: "Kristian",
+    name: "Kristian (Old)",
     paymentAddress: "0x41eb5F82af60873b3C14fEDB898A1712f5c35366",
   },
   "0x470c33abd57166940095d59bd8dd573cbae556c3": {
@@ -62,11 +62,23 @@ export const curatorData: CuratorData = {
     paymentAddress: "0x1DeC5f50cB1467F505BB3ddFD408805114406b10",
   },
   "0x805797df0c0d7d70e14230b72e30171d730da55e": {
-    name: "Yannakis Old",
+    name: "Yannakis (Old)",
     paymentAddress: "0x5ce9fb617333b8c5a8f7787710f7c07002cb3516",
   },
   "0x5ce9fb617333b8c5a8f7787710f7c07002cb3516": {
     name: "Yannakis",
     paymentAddress: "0x5ce9fb617333b8c5a8f7787710f7c07002cb3516",
+  },
+  "0x3ec034F5F88aAfe8f51340f398B119A2b07B884f": {
+    name: "Kristian (Old)",
+    paymentAddress: "0x3ec034F5F88aAfe8f51340f398B119A2b07B884f",
+  },
+  "0x60afadfce78b09a7ee7b06321170bce9cc91a11a": {
+    name: "Kristian",
+    paymentAddress: "0x60afadfce78b09a7ee7b06321170bce9cc91a11a",
+  },
+  "0x944df968421fbe57f0104c1b0bf810b2fb4eb674": {
+    name: "AndreusAs",
+    paymentAddress: "0x944df968421fbe57f0104c1b0bf810b2fb4eb674",
   },
 };
