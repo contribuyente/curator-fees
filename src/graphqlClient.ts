@@ -1,7 +1,7 @@
 import { CurationsResponse, DateRange } from "./types";
 
 const GRAPHQL_ENDPOINT =
-  "https://subgraph.decentraland.org/collections-matic-mainnet";
+  "https://corsproxy.io/?url=https://subgraph.decentraland.org/collections-matic-mainnet";
 
 export async function fetchCurations(
   dateRange: DateRange,
