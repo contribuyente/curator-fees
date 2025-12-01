@@ -145,7 +145,10 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
                             <span>Transaction</span>
                           </div>
                           {curator.curations.map((curation, index) => (
-                            <div key={`${curation.txHash}-${index}`} className="curation-row">
+                            <div 
+                              key={`${curation.txHash}-${index}`} 
+                              className={`curation-row ${curation.curatorFee === 0 ? 'curation-row-no-fee' : ''}`}
+                            >
                               <span className="curation-date" data-label="Date: ">
                                 {formatTimestamp(curation.timestamp)}
                               </span>
@@ -218,7 +221,10 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
                     Curations ({curator.curationCount}) - Chronological Order
                   </h4>
                   {curator.curations.map((curation, index) => (
-                    <div key={`mobile-${curation.txHash}-${index}`} className="mobile-curation-item">
+                    <div 
+                      key={`mobile-${curation.txHash}-${index}`} 
+                      className={`mobile-curation-item ${curation.curatorFee === 0 ? 'mobile-curation-item-no-fee' : ''}`}
+                    >
                       <div className="mobile-curation-row">
                         <span className="mobile-curation-label">Date</span>
                         <span className="mobile-curation-value">

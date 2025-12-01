@@ -103,6 +103,10 @@ export function CuratorFeesCalculator({
     let curationsWithoutTxData = 0;
     const collectionMismatches = new Map<string, { lookingFor: string; found: string[] }>();
 
+    // Track items that have already been curated (only first curation pays)
+    // Key: collectionId-itemId, Value: true if already curated
+    const curatedItems = new Set<string>();
+
     // Process each curation individually (each represents one item being curated)
     sortedCurations.forEach((curation) => {
       const curatorId = curation.curator.id.toLowerCase();
@@ -171,34 +175,50 @@ export function CuratorFeesCalculator({
         }
       }
 
-      if (curationFee > 0) {
-        const curationDetail: CurationDetail = {
-          timestamp: curation.timestamp,
-          txHash: curation.txHash,
-          collectionId: curation.collection.id,
-          collectionName: curation.collection.name,
-          itemId: itemId,
-          itemName: itemName,
-          creationFee: creationFeeAmount,
-          curatorFee: curationFee
-        };
+      // Check if this item has already been curated (only first curation pays)
+      const itemKey = itemId ? `${collectionId}-${itemId}` : null;
+      const isFirstCuration = itemKey ? !curatedItems.has(itemKey) : true;
+      
+      // If this is a duplicate curation for the same item, set fees to 0
+      if (!isFirstCuration && itemKey) {
+        curationFee = 0;
+        creationFeeAmount = 0;
+      } else if (itemKey) {
+        // Mark this item as curated
+        curatedItems.add(itemKey);
+      }
 
-        // Update curator totals
-        const existing = curatorFees.get(curatorId);
-        if (existing) {
+      // Always create the curation detail (even with 0 fees for duplicates)
+      // But only add to totals if it has fees
+      const curationDetail: CurationDetail = {
+        timestamp: curation.timestamp,
+        txHash: curation.txHash,
+        collectionId: curation.collection.id,
+        collectionName: curation.collection.name,
+        itemId: itemId,
+        itemName: itemName,
+        creationFee: creationFeeAmount,
+        curatorFee: curationFee
+      };
+
+      // Update curator totals - only count curations with fees
+      const existing = curatorFees.get(curatorId);
+      if (existing) {
+        if (curationFee > 0) {
           existing.totalFees += curationFee;
           existing.curationCount += 1;
-          existing.curations.push(curationDetail);
-        } else {
-          curatorFees.set(curatorId, {
-            curatorId,
-            curatorName: curatorInfo.name,
-            paymentAddress: curatorInfo.paymentAddress,
-            totalFees: curationFee,
-            curationCount: 1,
-            curations: [curationDetail]
-          });
         }
+        // Always add to curations list (even if 0 fee)
+        existing.curations.push(curationDetail);
+      } else {
+        curatorFees.set(curatorId, {
+          curatorId,
+          curatorName: curatorInfo.name,
+          paymentAddress: curatorInfo.paymentAddress,
+          totalFees: curationFee > 0 ? curationFee : 0,
+          curationCount: curationFee > 0 ? 1 : 0,
+          curations: [curationDetail]
+        });
       }
     });
 

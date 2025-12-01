@@ -627,6 +627,31 @@ body {
   background: var(--secondary-on-modal-hover);
 }
 
+.curation-row-no-fee {
+  opacity: 0.5;
+  background: var(--background);
+}
+
+.curation-row-no-fee:hover {
+  background: var(--secondary-on-modal);
+}
+
+.curation-row-no-fee .curation-date,
+.curation-row-no-fee .curation-collection,
+.curation-row-no-fee .curation-creation-fee,
+.curation-row-no-fee .curation-curator-fee {
+  color: var(--secondary-text);
+}
+
+.curation-row-no-fee .collection-link {
+  color: var(--secondary-text);
+}
+
+.curation-row-no-fee .collection-link:hover {
+  color: var(--secondary-text);
+  text-decoration: none;
+}
+
 .curation-date {
   font-size: 0.875rem;
   color: var(--secondary-text);
@@ -780,6 +805,25 @@ body {
 
 .mobile-curation-item:last-child {
   margin-bottom: 0;
+}
+
+.mobile-curation-item-no-fee {
+  opacity: 0.5;
+  background: var(--background);
+}
+
+.mobile-curation-item-no-fee .mobile-curation-label,
+.mobile-curation-item-no-fee .mobile-curation-value {
+  color: var(--secondary-text);
+}
+
+.mobile-curation-item-no-fee .mobile-collection-link {
+  color: var(--secondary-text);
+}
+
+.mobile-curation-item-no-fee .mobile-collection-link:hover {
+  color: var(--secondary-text);
+  text-decoration: none;
 }
 
 .mobile-curation-row {
