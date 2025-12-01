@@ -29,6 +29,14 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
   const getCollectionUrl = (collectionId: string) => 
     `https://decentraland.org/marketplace/collections/${collectionId}`;
 
+  const getItemUrl = (collectionId: string, itemId: string | null) => {
+    if (itemId) {
+      return `https://decentraland.org/marketplace/contracts/${collectionId}/items/${itemId}`;
+    }
+    // Fallback to collection if itemId is not available
+    return getCollectionUrl(collectionId);
+  };
+
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(parseInt(timestamp) * 1000);
     return format(date, 'MMM dd, yyyy HH:mm');
@@ -143,12 +151,12 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
                               </span>
                               <span className="curation-collection" data-label="Collection: ">
                                 <a 
-                                  href={getCollectionUrl(curation.collectionId)} 
+                                  href={getItemUrl(curation.collectionId, curation.itemId)} 
                                   target="_blank" 
                                   rel="noopener noreferrer"
                                   className="collection-link"
                                 >
-                                  {curation.collectionName}
+                                  {curation.itemName || curation.collectionName}
                                 </a>
                               </span>
                               <span className="curation-creation-fee" data-label="Creation Fee: ">
@@ -221,12 +229,12 @@ export function CuratorFeesReport({ fees, isLoading }: CuratorFeesReportProps) {
                         <span className="mobile-curation-label">Collection</span>
                         <span className="mobile-curation-value">
                           <a 
-                            href={getCollectionUrl(curation.collectionId)} 
+                            href={getItemUrl(curation.collectionId, curation.itemId)} 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="mobile-collection-link"
                           >
-                            {curation.collectionName}
+                            {curation.itemName || curation.collectionName}
                           </a>
                         </span>
                       </div>

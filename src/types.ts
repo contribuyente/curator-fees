@@ -63,6 +63,8 @@ export interface CurationDetail {
   txHash: string;
   collectionId: string;
   collectionName: string;
+  itemId: string | null;
+  itemName: string | null;
   creationFee: number;
   curatorFee: number;
 }
