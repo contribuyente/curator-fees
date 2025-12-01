@@ -9,7 +9,9 @@ A web application for calculating and reporting curator fees in the Decentraland
 - **Fee Calculation**: Automatically calculates curator fees (1/3 of creation fees) from GraphQL data
 - **Detailed Reports**: Expandable curator details showing individual curations with timestamps
 - **Multisig Integration**: Export payment data as CSV format for multisig wallet transactions
-- **Blockchain Links**: Direct links to Polygonscan transactions and Decentraland marketplace collections
+- **Blockchain Links**: Direct links to Polygonscan transactions and Decentraland marketplace items
+- **Item ID Extraction**: Workaround for GraphQL bug by parsing transaction logs to extract item IDs
+- **Duplicate Curation Handling**: Automatically identifies and excludes duplicate curations from fee calculations
 
 ## Tech Stack
 
@@ -19,7 +21,7 @@ A web application for calculating and reporting curator fees in the Decentraland
 - **Blockchain**: Polygon network (MANA token)
 - **Libraries**:
   - `date-fns` for date manipulation
-  - `viem` for wei conversions
+  - `viem` for wei conversions and blockchain interaction
   - Native fetch for GraphQL queries
 
 ## Getting Started
@@ -65,16 +67,35 @@ The built files will be in the `dist` directory.
 ### Data Flow
 
 1. **GraphQL Query**: Fetches curation data from Decentraland's subgraph endpoint
-2. **Fee Calculation**: For each curation, calculates `creationFee ÷ 3` as curator payment
-3. **Data Processing**: Groups curations by curator and aggregates totals
-4. **Report Generation**: Displays results with expandable details and export options
+2. **Transaction Log Extraction**: For each unique transaction, fetches receipt and extracts item IDs from curation events
+3. **Item Matching**: Matches item IDs with collection items to get names and metadata
+4. **Duplicate Detection**: Tracks items that have already been curated to identify duplicates
+5. **Fee Calculation**: For each curation, calculates `creationFee ÷ 3` as curator payment (only for first curation per item)
+6. **Data Processing**: Groups curations by curator and aggregates totals (excluding 0-fee duplicates)
+7. **Report Generation**: Displays results with expandable details and export options
 
 ### Fee Calculation Logic
 
 - Each curation represents one item being reviewed by a curator
 - Curator fee = `creationFee ÷ 3` (curator gets 1/3 of the creation fee)
+- **Duplicate Curation Handling**: Only the first curation of an item generates fees. Subsequent curations of the same item (edits/updates) show 0 fees and are excluded from payment calculations
 - Amounts are converted from wei (BigNumber) to MANA for display
 - CSV export converts back to wei for blockchain transactions
+
+### Item ID Extraction
+
+Due to a bug in the GraphQL indexer where the `item` field always returns `null`, the application uses a workaround to extract item IDs from transaction logs:
+
+1. **Transaction Log Parsing**: For each curation transaction, the app fetches the transaction receipt from Polygon
+2. **Event Detection**: Identifies curation events (signature: `0x87a972ab2db2d47a0bbefe72cefc4fe5a38b1b9d2bc4b9f366b59fdb6dbd9581`) emitted by collection contracts
+3. **Item ID Extraction**: Extracts the item ID from the event topics or data field
+4. **Item Matching**: Matches extracted item IDs with collection items by `blockchainId` to get item names
+5. **Link Generation**: Creates direct links to items in the Decentraland marketplace using the format: `https://decentraland.org/marketplace/contracts/{collectionId}/items/{itemId}`
+
+This workaround ensures that:
+- Item links point directly to specific items rather than collections
+- Item names are displayed in the UI
+- Duplicate curations can be properly identified and handled
 
 ### Data Sources
 
